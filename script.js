@@ -1,30 +1,18 @@
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
+const prices = document.querySelectorAll(".price");
 
-const getSum = () => {
+let total = 0;
 
-  const prices = document.querySelectorAll(".price");
-  let total = 0;
+prices.forEach((price) => {
+    total += Number(price.textContent);
+});
 
-  prices.forEach((p) => {
-    total += parseFloat(p.textContent);
-  });
+const tr = document.createElement("tr");
+tr.id = "ans";
 
-  const table = document.querySelector("table");
+const td = document.createElement("td");
+td.colSpan = 2;
+td.textContent = total;
 
-  const oldTotal = document.getElementById("total-row");
-  if (oldTotal) oldTotal.remove();
+tr.appendChild(td);
 
-  const row = document.createElement("tr");
-  row.id = "total-row";
-
-  const cell = document.createElement("td");
-  cell.colSpan = 2;
-  cell.textContent = total;
-
-  row.appendChild(cell);
-  table.appendChild(row);
-};
-
-getSumBtn.addEventListener("click", getSum);
+document.querySelector("table").appendChild(tr);
